@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Donda Location</string>
+    <string name="setup_title">Donda Location Setup</string>
+    <string name="config_summary">Not configured. Open a setup link to enroll this device.</string>
+    <string name="permissions_header">Permissions</string>
+    <string name="section_actions">Actions</string>
+    <string name="btn_notifications">Notifications</string>
+    <string name="btn_location">Location</string>
+    <string name="btn_background_location">Background location</string>
+    <string name="btn_battery">Battery optimization</string>
+    <string name="btn_register">Register with server</string>
+    <string name="btn_send_now">Send location now</string>
+    <string name="status_granted">Granted</string>
+    <string name="status_denied">Not granted</string>
+    <string name="status_unknown">Unknown</string>
+    <string name="notif_channel_name">Location requests</string>
+    <string name="notif_channel_description">Shown briefly while fetching your location</string>
+    <string name="notif_fetching">Locating…</string>
+    <string name="notif_failed">Location request failed</string>
+</resources>
