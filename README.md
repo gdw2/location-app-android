@@ -69,11 +69,14 @@ Deliver the printed link out of band (no public asset links are served).
 
 ## Build
 
-### Locally
+### Locally (devbox)
 ```bash
-# put your Firebase config at app/google-services.json
-gradle assembleDebug
-# or use Android Studio
+devbox install            # JDK 17 + Gradle
+devbox run setup-android  # downloads the Android SDK into ./.android-sdk (~1 GB)
+# put your Firebase config at app/google-services.json (gitignored)
+devbox run build-debug    # -> app/build/outputs/apk/debug/app-debug.apk
+devbox run build          # signed release (set KEYSTORE_PATH/KEYSTORE_PASSWORD/... env)
+# or open the project in Android Studio
 ```
 
 ### Release (CI)
@@ -96,6 +99,9 @@ base64 -w0 release.jks                # -> KEYSTORE_BASE64
 
 The Firebase Android app must be registered with the **release** keystore's SHA-1 and
 SHA-256 fingerprints (obtain with `keytool -list -v -keystore release.jks`).
+
+> The repo is private by default. For the simplest Obtainium setup, either make it public
+> or give Obtainium a GitHub token with access to this repo.
 
 ## Install via Obtainium
 
