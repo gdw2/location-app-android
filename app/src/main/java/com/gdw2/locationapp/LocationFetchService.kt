@@ -27,19 +27,22 @@ class LocationFetchService : Service() {
         )
 
         executor.execute {
+            var message: String
             try {
-                val fix = LocationProvider.getFix(this, 12000)
-                val message = if (fix == null) {
+                val fix = LocationProvider.getFix(this, 5000)
+                message = if (fix == null) {
                     "No location fix available"
                 } else {
                     DawarichClient.postPoint(this, fix).message
                 }
-                Log.i(TAG, "locate result: $message")
             } catch (e: Exception) {
-                Log.e(TAG, "locate failed", e)
-            } finally {
-                stopSelf()
+                message = "Error: ${e.message}"
             }
+            Prefs.init(this)
+            Prefs.lastResult = message
+            Prefs.lastResultAt = System.currentTimeMillis()
+            Log.i(TAG, "locate result: $message")
+            stopSelf()
         }
 
         return START_NOT_STICKY

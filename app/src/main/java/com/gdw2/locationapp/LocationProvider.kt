@@ -23,7 +23,7 @@ object LocationProvider {
     )
 
     @SuppressLint("MissingPermission")
-    fun getFix(context: Context, timeoutMs: Long = 12000): Fix? {
+    fun getFix(context: Context, timeoutMs: Long = 5000): Fix? {
         val client = LocationServices.getFusedLocationProviderClient(context)
 
         var location: Location? = try {

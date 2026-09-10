@@ -63,6 +63,14 @@ object Prefs {
         get() = p().getString("fcm_token", null)
         set(v) { p().edit().putString("fcm_token", v).apply() }
 
+    var lastResult: String?
+        get() = p().getString("last_result", null)
+        set(v) { p().edit().putString("last_result", v).apply() }
+
+    var lastResultAt: Long
+        get() = p().getLong("last_result_at", 0L)
+        set(v) { p().edit().putLong("last_result_at", v).apply() }
+
     var deviceId: String
         get() {
             p().getString("device_id", null)?.let { return it }

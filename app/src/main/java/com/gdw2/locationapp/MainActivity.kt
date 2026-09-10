@@ -159,7 +159,7 @@ class MainActivity : AppCompatActivity() {
         setResultText("Getting location…")
         executor.execute {
             val message = try {
-                val fix = LocationProvider.getFix(this, 12000)
+                val fix = LocationProvider.getFix(this, 5000)
                 if (fix == null) {
                     "No location fix (check permissions and GPS)"
                 } else {
@@ -168,9 +168,12 @@ class MainActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 "Error: ${e.message}"
             }
+            Prefs.lastResult = message
+            Prefs.lastResultAt = System.currentTimeMillis()
             runOnUiThread {
                 setResultText(message)
                 binding.btnSendNow.isEnabled = true
+                refreshStatus()
             }
         }
     }
@@ -206,7 +209,14 @@ class MainActivity : AppCompatActivity() {
             appendLine("Location (while using): ${yesNo(fine || coarse)}")
             appendLine("Location (background): ${yesNo(background)}")
             appendLine("Battery optimization exempt: ${yesNo(battery)}")
-            append("FCM registered: ${yesNo(!Prefs.fcmToken.isNullOrBlank())}")
+            appendLine("FCM registered: ${yesNo(!Prefs.fcmToken.isNullOrBlank())}")
+            val last = Prefs.lastResult
+            if (last != null) {
+                val ageSec = (System.currentTimeMillis() - Prefs.lastResultAt) / 1000
+                append("Last request: $last (${ageSec}s ago)")
+            } else {
+                append("Last request: none yet")
+            }
         }
     }
 
