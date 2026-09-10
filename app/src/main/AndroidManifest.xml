@@ -35,6 +35,15 @@
                     android:host="setup"
                     android:scheme="locationapp" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="donda.gdw2.com"
+                    android:pathPrefix="/loc/setup"
+                    android:scheme="https" />
+            </intent-filter>
         </activity>
 
         <service

@@ -62,10 +62,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleDeepLink(intent: Intent?) {
         val data = intent?.data ?: return
-        if (data.scheme != "locationapp" || data.host != "setup") return
+        val isCustom = data.scheme == "locationapp" && data.host == "setup"
+        val isHttps = data.scheme == "https" && data.host == "donda.gdw2.com" &&
+            data.path?.startsWith("/loc/setup") == true
+        if (!isCustom && !isHttps) return
 
-        val api = data.getQueryParameter("api")
         val token = data.getQueryParameter("token")
+        val api = data.getQueryParameter("api") ?: if (isHttps) "https://${data.host}" else null
         if (api.isNullOrBlank() || token.isNullOrBlank()) {
             setResultText("Setup link is missing api or token")
             return

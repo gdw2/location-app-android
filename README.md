@@ -55,6 +55,14 @@ Launching the app (or opening a setup link) shows a screen that:
 
 ## Deep link
 
+Preferred (tappable in email/browser; unverified App Link, no assetlinks needed):
+
+```
+https://donda.gdw2.com/loc/setup?token=<one-time-token>
+```
+
+Fallback custom scheme:
+
 ```
 locationapp://setup?api=https%3A%2F%2Fdonda.gdw2.com&token=<one-time-token>
 ```
@@ -62,10 +70,11 @@ locationapp://setup?api=https%3A%2F%2Fdonda.gdw2.com&token=<one-time-token>
 The token is single-use and expires (default 24h). Generate one on the Donda server:
 
 ```bash
-npm run make-setup-link -- --person Greg --email gdwarr@gmail.com --donda-url https://donda.gdw2.com
+npm run make-setup-link -- --person Greg --email gdwar@gmail.com --donda-url https://donda.gdw2.com
 ```
 
-Deliver the printed link out of band (no public asset links are served).
+Deliver the printed link out of band (no public asset links are served). When tapping the
+`https://` link, choose **Donda Location** in the Android chooser.
 
 ## Build
 
